@@ -202,7 +202,10 @@ export const authService = {
    */
   updateProfile: async (userData) => {
     try {
-      const response = await api.put('/profile', userData);
+      const token = localStorage.getItem('token');
+      const response = await axios.put('http://localhost:5000/api/users/profile', userData, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
       
       if (response.data.success) {
         return {
