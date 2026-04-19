@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Clock, CheckCircle2, TrendingUp, Users, ArrowRight, User } from "lucide-react";
 import axios from "axios";
+import { API_ENDPOINTS } from "../config/api.js";
 
 const DashboardPage = ({ user }) => {
   const [stats, setStats] = useState({ activeRequests: 0, solvedRequests: 0, score: user?.trustScore || 0 });
@@ -13,7 +14,7 @@ const DashboardPage = ({ user }) => {
     // We'll mock it by fetching all requests and filtering
     const fetchStats = async () => {
       try {
-        const { data } = await axios.get("http://localhost:5000/api/requests");
+        const { data } = await axios.get(API_ENDPOINTS.REQUESTS);
         if (data.success) {
           const myRequests = data.data.filter(r => r.createdBy._id === user?._id || r.createdBy === user?._id);
           setStats({

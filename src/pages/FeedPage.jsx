@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Filter, Search, TrendingUp } from "lucide-react";
 import axios from "axios";
+import { API_ENDPOINTS } from "../config/api.js";
 
 const FeedPage = () => {
   const [requests, setRequests] = useState([]);
@@ -12,7 +13,7 @@ const FeedPage = () => {
   useEffect(() => {
     const fetchRequests = async () => {
       try {
-        const { data } = await axios.get("http://localhost:5000/api/requests");
+        const { data } = await axios.get(API_ENDPOINTS.REQUESTS);
         if (data.success) {
           setRequests(data.data);
         }

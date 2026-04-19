@@ -2,6 +2,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { LogOut } from "lucide-react";
 import axios from "axios";
+import { API_ENDPOINTS } from "../config/api.js";
 
 const Navbar = ({ isAuthenticated, logout }) => {
   const location = useLocation();
@@ -20,7 +21,7 @@ const Navbar = ({ isAuthenticated, logout }) => {
   const fetchUnreadCount = async () => {
     try {
       const token = localStorage.getItem("token");
-      const { data } = await axios.get("http://localhost:5000/api/notifications", {
+      const { data } = await axios.get(`${API_ENDPOINTS.NOTIFICATIONS}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       if (data.success) {

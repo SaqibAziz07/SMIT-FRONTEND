@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Trophy, Star, Award, TrendingUp } from "lucide-react";
 import axios from "axios";
+import { API_ENDPOINTS } from "../config/api.js";
 
 const LeaderboardPage = () => {
   const [leaders, setLeaders] = useState([]);
@@ -10,7 +11,7 @@ const LeaderboardPage = () => {
   useEffect(() => {
     const fetchLeaders = async () => {
       try {
-        const { data } = await axios.get("http://localhost:5000/api/users/leaderboard");
+        const { data } = await axios.get(`${API_ENDPOINTS.USERS}/leaderboard`);
         if (data.success) {
           setLeaders(data.data);
         }

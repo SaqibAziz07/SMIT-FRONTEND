@@ -3,6 +3,7 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { User, Clock, CheckCircle2, AlertTriangle, ArrowLeft, Send } from "lucide-react";
 import axios from "axios";
+import { API_ENDPOINTS } from "../config/api.js";
 
 const RequestDetailPage = ({ user }) => {
   const { id } = useParams();
@@ -19,7 +20,7 @@ const RequestDetailPage = ({ user }) => {
   useEffect(() => {
     const fetchRequest = async () => {
       try {
-        const { data } = await axios.get(`http://localhost:5000/api/requests/${id}`);
+        const { data } = await axios.get(`${API_ENDPOINTS.REQUESTS}/${id}`);
         if (data.success) {
           setRequest(data.data);
         }
@@ -37,7 +38,7 @@ const RequestDetailPage = ({ user }) => {
     setSolving(true);
     try {
       const token = localStorage.getItem("token");
-      const { data } = await axios.put(`http://localhost:5000/api/requests/${id}/solve`, {}, {
+      const { data } = await axios.put(`${API_ENDPOINTS.REQUESTS}/${id}/solve`, {}, { {
         headers: { Authorization: `Bearer ${token}` }
       });
       if (data.success) {

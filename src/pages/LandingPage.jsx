@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { API_ENDPOINTS } from "../config/api.js";
 
 const LandingPage = ({ isAuthenticated }) => {
   const [featured, setFeatured] = useState([]);
@@ -9,7 +10,7 @@ const LandingPage = ({ isAuthenticated }) => {
   useEffect(() => {
     const fetchFeatured = async () => {
       try {
-        const { data } = await axios.get("http://localhost:5000/api/requests?status=Open");
+        const { data } = await axios.get(`${API_ENDPOINTS.REQUESTS}?status=Open`);
         if (data.success) {
           setFeatured(data.data.slice(0, 3));
         }

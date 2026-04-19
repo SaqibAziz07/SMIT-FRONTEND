@@ -3,6 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Send } from "lucide-react";
 import axios from "axios";
+import { API_ENDPOINTS } from "../config/api.js";
 
 const MessagesPage = () => {
   const [searchParams] = useSearchParams();
@@ -20,8 +21,8 @@ const MessagesPage = () => {
       try {
         const token = localStorage.getItem("token");
         const [msgRes, userRes] = await Promise.all([
-          axios.get("http://localhost:5000/api/messages", { headers: { Authorization: `Bearer ${token}` } }),
-          axios.get("http://localhost:5000/api/users", { headers: { Authorization: `Bearer ${token}` } })
+          axios.get(API_ENDPOINTS.MESSAGES, { headers: { Authorization: `Bearer ${token}` } }),
+          axios.get(API_ENDPOINTS.USERS, { headers: { Authorization: `Bearer ${token}` } })
         ]);
 
         if (msgRes.data.success) setMessages(msgRes.data.data);
@@ -56,7 +57,7 @@ const MessagesPage = () => {
     setSendingMessage(true);
     try {
       const token = localStorage.getItem("token");
-      const { data } = await axios.post("http://localhost:5000/api/messages", 
+      const { data } = await axios.post(API_ENDPOINTS.MESSAGES, 
         { receiverId, text: newMessage },
         { headers: { Authorization: `Bearer ${token}` } }
       );

@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import axios from "axios";
 import { CheckCircle2, XCircle, Loader2 } from "lucide-react";
+import { API_ENDPOINTS } from "../config/api.js";
 
 const VerifyEmailPage = () => {
   const { token } = useParams();
@@ -12,7 +13,7 @@ const VerifyEmailPage = () => {
   useEffect(() => {
     const verify = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/auth/verify/${token}`);
+        const response = await axios.get(`${API_ENDPOINTS.AUTH}/verify/${token}`);
         setStatus("success");
         setMessage(response.data.message);
       } catch (err) {

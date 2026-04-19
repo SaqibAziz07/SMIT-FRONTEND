@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import axios from "axios";
+import { API_ENDPOINTS } from "../config/api.js";
 
 const AuthPage = ({ login }) => {
   const [isLogin, setIsLogin] = useState(true);
@@ -17,13 +18,13 @@ const AuthPage = ({ login }) => {
 
     try {
       if (isLogin) {
-        const response = await axios.post(`http://localhost:5000/api/auth/login`, { 
+        const response = await axios.post(`${API_ENDPOINTS.AUTH}/login`, { 
           email: formData.email, 
           password: formData.password 
         });
         login(response.data.user, response.data.token);
       } else {
-        const response = await axios.post(`http://localhost:5000/api/auth/register`, formData);
+        const response = await axios.post(`${API_ENDPOINTS.AUTH}/register`, formData);
         setSuccess(response.data.message);
       }
     } catch (err) {

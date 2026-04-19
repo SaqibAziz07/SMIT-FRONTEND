@@ -1,6 +1,7 @@
 import axios from 'axios';
+import { API_ENDPOINTS } from '../config/api.js';
 
-const API_URL = 'http://localhost:5000/api/auth';
+const API_URL = API_ENDPOINTS.AUTH;
 
 // Create axios instance with default config
 const api = axios.create({
@@ -203,7 +204,7 @@ export const authService = {
   updateProfile: async (userData) => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.put('http://localhost:5000/api/users/profile', userData, {
+      const response = await axios.put(`${API_ENDPOINTS.USERS}/profile`, userData, {
         headers: { Authorization: `Bearer ${token}` }
       });
       

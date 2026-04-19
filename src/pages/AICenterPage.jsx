@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { BrainCircuit, Zap, Users, ShieldAlert, ArrowRight } from "lucide-react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { API_ENDPOINTS } from "../config/api.js";
 
 const AICenterPage = () => {
   const [insights, setInsights] = useState({ requests: [], highUrgency: 0, mentorCount: 2 });
@@ -11,7 +12,7 @@ const AICenterPage = () => {
   useEffect(() => {
     const fetchRequests = async () => {
       try {
-        const { data } = await axios.get("http://localhost:5000/api/requests");
+        const { data } = await axios.get(API_ENDPOINTS.REQUESTS);
         if (data.success) {
           const openReqs = data.data.filter(r => r.status === "Open");
           const highUrgency = openReqs.filter(r => r.urgency === "High" || r.urgency === "Critical").length;

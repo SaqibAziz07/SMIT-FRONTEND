@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import axios from "axios";
+import { API_ENDPOINTS } from "../config/api.js";
 
 const OnboardingPage = ({ user, login }) => {
   const navigate = useNavigate();
@@ -27,7 +28,7 @@ const OnboardingPage = ({ user, login }) => {
     try {
       const token = localStorage.getItem("token");
       const { data } = await axios.put(
-        "http://localhost:5000/api/users/profile",
+        `${API_ENDPOINTS.USERS}/profile`,
         payload,
         { headers: { Authorization: `Bearer ${token}` } }
       );

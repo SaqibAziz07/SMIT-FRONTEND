@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Bell, Trash2, MessageCircle, Award, AlertCircle, CheckCircle } from "lucide-react";
 import axios from "axios";
+import { API_ENDPOINTS } from "../config/api.js";
 
 const NotificationsPage = () => {
   const [notifications, setNotifications] = useState([]);
@@ -18,7 +19,7 @@ const NotificationsPage = () => {
   const fetchNotifications = async () => {
     try {
       const token = localStorage.getItem("token");
-      const { data } = await axios.get("http://localhost:5000/api/notifications", {
+      const { data } = await axios.get(API_ENDPOINTS.NOTIFICATIONS, {
         headers: { Authorization: `Bearer ${token}` }
       });
 
@@ -36,7 +37,7 @@ const NotificationsPage = () => {
   const markAsRead = async (id) => {
     try {
       const token = localStorage.getItem("token");
-      await axios.put(`http://localhost:5000/api/notifications/${id}/read`, {}, {
+      await axios.put(`${API_ENDPOINTS.NOTIFICATIONS}/${id}/read`, {}, { {
         headers: { Authorization: `Bearer ${token}` }
       });
       fetchNotifications();
@@ -48,7 +49,7 @@ const NotificationsPage = () => {
   const deleteNotification = async (id) => {
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`http://localhost:5000/api/notifications/${id}`, {
+      await axios.delete(`${API_ENDPOINTS.NOTIFICATIONS}/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       fetchNotifications();
@@ -60,7 +61,7 @@ const NotificationsPage = () => {
   const markAllAsRead = async () => {
     try {
       const token = localStorage.getItem("token");
-      await axios.put("http://localhost:5000/api/notifications/mark-all-read", {}, {
+      await axios.put(`${API_ENDPOINTS.NOTIFICATIONS}/mark-all-read`, {}, {
         headers: { Authorization: `Bearer ${token}` }
       });
       fetchNotifications();

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { BrainCircuit, Sparkles } from "lucide-react";
 import axios from "axios";
+import { API_ENDPOINTS } from "../config/api.js";
 
 const CreateRequestPage = ({ user }) => {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ const CreateRequestPage = ({ user }) => {
     setAiMessage("");
     try {
       const token = localStorage.getItem("token");
-      const { data } = await axios.post("http://localhost:5000/api/ai/suggest", 
+      const { data } = await axios.post(`${API_ENDPOINTS.AI}/suggest`, 
         { title: formData.title, description: formData.description },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -58,7 +59,7 @@ const CreateRequestPage = ({ user }) => {
     setLoading(true);
     try {
       const token = localStorage.getItem("token");
-      await axios.post("http://localhost:5000/api/requests", formData, {
+      await axios.post(API_ENDPOINTS.REQUESTS, formData, {
         headers: { Authorization: `Bearer ${token}` }
       });
       navigate("/explore");
