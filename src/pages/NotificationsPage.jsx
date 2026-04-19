@@ -1,6 +1,13 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Bell, Trash2, MessageCircle, Award, AlertCircle, CheckCircle } from "lucide-react";
+import {
+  Bell,
+  Trash2,
+  MessageCircle,
+  Award,
+  AlertCircle,
+  CheckCircle,
+} from "lucide-react";
 import axios from "axios";
 import { API_ENDPOINTS } from "../config/api.js";
 
@@ -20,7 +27,7 @@ const NotificationsPage = () => {
     try {
       const token = localStorage.getItem("token");
       const { data } = await axios.get(API_ENDPOINTS.NOTIFICATIONS, {
-        headers: { Authorization: `Bearer ${token}` }
+        headers: { Authorization: `Bearer ${token}` },
       });
 
       if (data.success) {
@@ -37,9 +44,13 @@ const NotificationsPage = () => {
   const markAsRead = async (id) => {
     try {
       const token = localStorage.getItem("token");
-      await axios.put(`${API_ENDPOINTS.NOTIFICATIONS}/${id}/read`, {}, { {
-        headers: { Authorization: `Bearer ${token}` }
-      });
+      await axios.put(
+        `${API_ENDPOINTS.NOTIFICATIONS}/${id}/read`,
+        {},
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        },
+      );
       fetchNotifications();
     } catch (err) {
       console.error("Failed to mark as read:", err);
@@ -50,7 +61,7 @@ const NotificationsPage = () => {
     try {
       const token = localStorage.getItem("token");
       await axios.delete(`${API_ENDPOINTS.NOTIFICATIONS}/${id}`, {
-        headers: { Authorization: `Bearer ${token}` }
+        headers: { Authorization: `Bearer ${token}` },
       });
       fetchNotifications();
     } catch (err) {
@@ -61,9 +72,13 @@ const NotificationsPage = () => {
   const markAllAsRead = async () => {
     try {
       const token = localStorage.getItem("token");
-      await axios.put(`${API_ENDPOINTS.NOTIFICATIONS}/mark-all-read`, {}, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
+      await axios.put(
+        `${API_ENDPOINTS.NOTIFICATIONS}/mark-all-read`,
+        {},
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        },
+      );
       fetchNotifications();
     } catch (err) {
       console.error("Failed to mark all as read:", err);
@@ -134,7 +149,7 @@ const NotificationsPage = () => {
     }
   };
 
-  const localUnreadCount = notifications.filter(n => !n.read).length;
+  const localUnreadCount = notifications.filter((n) => !n.read).length;
 
   return (
     <div className="max-w-4xl mx-auto">
@@ -146,7 +161,9 @@ const NotificationsPage = () => {
       >
         <div className="flex justify-between items-start mb-6">
           <div>
-            <h1 className="text-4xl font-extrabold text-[#1a2e2a] mb-2">Notifications</h1>
+            <h1 className="text-4xl font-extrabold text-[#1a2e2a] mb-2">
+              Notifications
+            </h1>
             <p className="text-gray-500">
               {unreadCount > 0 ? `${unreadCount} unread` : "All caught up!"}
             </p>
@@ -185,16 +202,18 @@ const NotificationsPage = () => {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: idx * 0.05 }}
-                className={`border rounded-2xl p-4 transition-all cursor-pointer ${
-                  getNotificationColor(notif.type)
-                } ${!notif.read ? 'border-l-4 border-l-[#115e59]' : ''}`}
+                className={`border rounded-2xl p-4 transition-all cursor-pointer ${getNotificationColor(
+                  notif.type,
+                )} ${!notif.read ? "border-l-4 border-l-[#115e59]" : ""}`}
                 onClick={() => markAsRead(notif._id)}
               >
                 <div className="flex gap-4">
                   {/* Icon */}
                   <div className="flex-shrink-0 mt-1">
                     <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center border border-gray-200">
-                      <IconComponent className={`w-5 h-5 ${getIconColor(notif.type)}`} />
+                      <IconComponent
+                        className={`w-5 h-5 ${getIconColor(notif.type)}`}
+                      />
                     </div>
                   </div>
 
@@ -202,11 +221,17 @@ const NotificationsPage = () => {
                   <div className="flex-1 min-w-0">
                     <div className="flex items-start justify-between gap-2">
                       <div>
-                        <h3 className={`font-semibold text-[#1a2e2a] ${!notif.read ? 'font-bold' : ''}`}>
+                        <h3
+                          className={`font-semibold text-[#1a2e2a] ${!notif.read ? "font-bold" : ""}`}
+                        >
                           {notif.title}
                         </h3>
-                        <p className="text-gray-600 text-sm mt-1">{notif.message}</p>
-                        <p className="text-xs text-gray-500 mt-2">{formatTime(new Date(notif.createdAt))}</p>
+                        <p className="text-gray-600 text-sm mt-1">
+                          {notif.message}
+                        </p>
+                        <p className="text-xs text-gray-500 mt-2">
+                          {formatTime(new Date(notif.createdAt))}
+                        </p>
                       </div>
 
                       {/* Read indicator */}

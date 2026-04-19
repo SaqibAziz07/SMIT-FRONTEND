@@ -38,7 +38,7 @@ const RequestDetailPage = ({ user }) => {
     setSolving(true);
     try {
       const token = localStorage.getItem("token");
-      const { data } = await axios.put(`${API_ENDPOINTS.REQUESTS}/${id}/solve`, {}, { {
+      const { data } = await axios.put(`${API_ENDPOINTS.REQUESTS}/${id}/solve`, {}, {
         headers: { Authorization: `Bearer ${token}` }
       });
       if (data.success) {
