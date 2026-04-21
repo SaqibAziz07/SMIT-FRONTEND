@@ -210,11 +210,15 @@ const NotificationsPage = () => {
                 <div className="flex gap-4">
                   {/* Icon */}
                   <div className="flex-shrink-0 mt-1">
-                    <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center border border-gray-200">
-                      <IconComponent
-                        className={`w-5 h-5 ${getIconColor(notif.type)}`}
-                      />
-                    </div>
+                    {notif.relatedUser?.avatar ? (
+                      <img src={notif.relatedUser.avatar} alt="" className="w-10 h-10 rounded-full object-cover border border-gray-200" />
+                    ) : (
+                      <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center border border-gray-200">
+                        <IconComponent
+                          className={`w-5 h-5 ${getIconColor(notif.type)}`}
+                        />
+                      </div>
+                    )}
                   </div>
 
                   {/* Content */}

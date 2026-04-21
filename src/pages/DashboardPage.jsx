@@ -39,9 +39,13 @@ const DashboardPage = ({ user }) => {
         <h1 className="text-3xl font-extrabold text-[#1a2e2a]">My Dashboard</h1>
         <Link 
           to="/profile"
-          className="bg-white hover:bg-gray-50 border border-gray-200 text-gray-700 px-4 py-2 rounded-xl text-sm font-bold transition-all flex items-center gap-2 shadow-sm"
+          className="bg-white hover:bg-gray-50 border border-gray-200 text-gray-700 px-4 py-2 rounded-xl text-sm font-bold transition-all flex items-center gap-3 shadow-sm"
         >
-          <User size={16} />
+          {user?.avatar ? (
+            <img src={user.avatar} alt="" className="w-6 h-6 rounded-md object-cover" />
+          ) : (
+            <User size={16} />
+          )}
           View Profile
         </Link>
       </div>

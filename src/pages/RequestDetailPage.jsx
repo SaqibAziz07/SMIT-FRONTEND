@@ -100,11 +100,25 @@ const RequestDetailPage = ({ user }) => {
 
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center pt-8 border-t border-gray-100 gap-6">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center text-gray-500 font-bold text-xl">
-                {request.createdBy?.name?.charAt(0) || <User size={24}/>}
+              <div className="relative shrink-0">
+                {request.createdBy?.avatar ? (
+                  <img src={request.createdBy.avatar} alt={request.createdBy.name} className="w-12 h-12 rounded-full object-cover ring-2 ring-[#0d7377]/10 shadow-md" />
+                ) : (
+                  <div className="w-12 h-12 bg-gradient-to-br from-[#129F8A] to-[#0d7377] text-white rounded-full flex items-center justify-center font-bold text-xl shadow-md">
+                    {request.createdBy?.name?.charAt(0) || "?"}
+                  </div>
+                )}
+                {request.createdBy?.lastSeen && (Date.now() - new Date(request.createdBy.lastSeen).getTime() < 5 * 60 * 1000) && (
+                  <span className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-green-400 border-2 border-white rounded-full" />
+                )}
               </div>
               <div>
-                <div className="font-bold text-[#1a2e2a] text-lg">{request.createdBy?.name || "Anonymous"}</div>
+                <div className="font-bold text-[#1a2e2a] text-lg flex items-center gap-2">
+                  {request.createdBy?.name || "Anonymous"}
+                  {(Date.now() - new Date(request.createdBy?.lastSeen).getTime() < 5 * 60 * 1000) && (
+                    <span className="text-[10px] text-green-500 font-bold uppercase tracking-wider">Online</span>
+                  )}
+                </div>
                 <div className="text-sm text-gray-500 font-medium">Trust Score: {request.createdBy?.trustScore || 0}%</div>
               </div>
             </div>

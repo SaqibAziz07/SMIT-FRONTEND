@@ -38,7 +38,7 @@ const LandingPage = ({ isAuthenticated }) => {
               HelpHub AI is a community-powered support network for students, mentors, creators, and builders. Ask for help, offer help, track impact, and let AI surface smarter matches across the platform.
             </p>
             <div className="flex flex-wrap gap-4 mb-4">
-              <Link to="/auth" className="bg-[#115e59] hover:bg-[#0f514e] text-white px-6 py-3.5 rounded-full font-bold shadow-sm transition-colors text-sm">
+              <Link to="/auth" className="bg-[#129F8A] hover:bg-[#129F8A] text-white px-6 py-3.5 rounded-full font-bold shadow-sm transition-colors text-sm">
                 Open product demo
               </Link>
               <Link to="/auth" className="bg-white border border-gray-200 text-[#1a2e2a] hover:bg-gray-50 px-6 py-3.5 rounded-full font-bold transition-colors text-sm">
@@ -48,17 +48,17 @@ const LandingPage = ({ isAuthenticated }) => {
           </div>
 
           <div className="flex flex-wrap gap-4 mt-auto">
-            <div className="bg-white p-5 rounded-[1.5rem] border border-gray-100 shadow-sm flex-1 min-w-[120px]">
+            <div className="bg-white p-5 rounded-3xl border border-gray-100 shadow-sm flex-1 min-w-30">
               <div className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">MEMBERS</div>
               <div className="text-3xl font-extrabold text-[#1a2e2a] mb-2">384+</div>
               <p className="text-gray-500 text-xs">Students, mentors, and helpers in the loop.</p>
             </div>
-            <div className="bg-white p-5 rounded-[1.5rem] border border-gray-100 shadow-sm flex-1 min-w-[120px]">
+            <div className="bg-white p-5 rounded-3xl border border-gray-100 shadow-sm flex-1 min-w-30">
               <div className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">REQUESTS</div>
               <div className="text-3xl font-extrabold text-[#1a2e2a] mb-2">72+</div>
               <p className="text-gray-500 text-xs">Support posts shared across learning journeys.</p>
             </div>
-            <div className="bg-white p-5 rounded-[1.5rem] border border-gray-100 shadow-sm flex-1 min-w-[120px]">
+            <div className="bg-white p-5 rounded-3xl border border-gray-100 shadow-sm flex-1 min-w-30">
               <div className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">SOLVED</div>
               <div className="text-3xl font-extrabold text-[#1a2e2a] mb-2">69+</div>
               <p className="text-gray-500 text-xs">Problems resolved through fast community action.</p>
@@ -67,7 +67,7 @@ const LandingPage = ({ isAuthenticated }) => {
         </div>
 
         {/* Right Column (Dark Pill Card) */}
-        <div className="w-full md:w-[40%] bg-[#1a2e2a] text-white p-10 py-12 rounded-[2.5rem] shadow-sm relative overflow-hidden flex flex-col justify-between">
+        <div className="w-full md:w-[40%] bg-[#1a2e2a] text-white p-10 py-12 rounded-3xl lg:rounded-[2.5rem] shadow-sm relative overflow-hidden flex flex-col justify-between">
           <div className="absolute top-8 right-8 w-16 h-16 bg-[#f0c040] rounded-full filter blur-sm"></div>
           
           <div className="relative z-10 mb-8">
@@ -81,11 +81,11 @@ const LandingPage = ({ isAuthenticated }) => {
           </div>
 
           <div className="relative z-10 flex flex-col gap-3">
-            <div className="bg-[#e2f1ec] text-[#1a2e2a] p-4 rounded-2xl">
+            <div className="bg-[#e2f1ec] text-[#1a2e2a] p-4 rounded-xl">
               <h4 className="font-bold text-[15px] mb-1">AI request intelligence</h4>
               <p className="text-[13px] text-gray-600">Auto-categorization, urgency detection, tags, rewrite suggestions, and trend snapshots.</p>
             </div>
-            <div className="bg-[#e2f1ec] text-[#1a2e2a] p-4 rounded-2xl">
+            <div className="bg-[#e2f1ec] text-[#1a2e2a] p-4 rounded-xl">
               <h4 className="font-bold text-[15px] mb-1">Community trust graph</h4>
               <p className="text-[13px] text-gray-600">Badges, helper rankings, trust score boosts, and visible contribution history.</p>
             </div>
@@ -96,26 +96,26 @@ const LandingPage = ({ isAuthenticated }) => {
 
       {/* Core Flow */}
       <div className="flex flex-col gap-6">
-        <div className="flex justify-between items-end">
+        <div className="flex md:justify-between md:items-end flex-col md:flex-row gap-6">
           <div>
             <span className="text-xs font-bold tracking-widest text-[#115e59] uppercase mb-2 block">CORE FLOW</span>
             <h2 className="text-[32px] font-extrabold text-[#1a2e2a]">From struggling alone to solving together</h2>
           </div>
-          <Link to="/auth" className="bg-white border border-gray-200 text-[#1a2e2a] px-5 py-2.5 rounded-full text-sm font-bold shadow-sm hover:bg-gray-50">
-            Try onboarding AI
+          <Link to="/auth" className="bg-white border border-gray-200 text-[#1a2e2a] px-4 py-2 w-38 whitespace-nowrap rounded-full text-sm font-bold shadow-sm hover:bg-gray-50">
+            Try Onboarding AI
           </Link>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-white p-6 rounded-[2rem] border border-gray-100 shadow-sm">
+          <div className="bg-white p-6 rounded-4xl border border-gray-100 shadow-sm">
             <h3 className="font-bold text-lg text-[#1a2e2a] mb-2">Ask for help clearly</h3>
             <p className="text-gray-500 text-sm leading-relaxed">Create structured requests with category, urgency. AI suggestions, and tags that attract the right people.</p>
           </div>
-          <div className="bg-white p-6 rounded-[2rem] border border-gray-100 shadow-sm">
+          <div className="bg-white p-6 rounded-4xl border border-gray-100 shadow-sm">
             <h3 className="font-bold text-lg text-[#1a2e2a] mb-2">Discover the right people</h3>
             <p className="text-gray-500 text-sm leading-relaxed">Use the explore feed, helper lists, notifications, and messaging to move quickly once a match happens.</p>
           </div>
-          <div className="bg-white p-6 rounded-[2rem] border border-gray-100 shadow-sm">
+          <div className="bg-white p-6 rounded-4xl border border-gray-100 shadow-sm">
             <h3 className="font-bold text-lg text-[#1a2e2a] mb-2">Track real contribution</h3>
             <p className="text-gray-500 text-sm leading-relaxed">Trust scores, badges, solved requests, and rankings help the community recognize meaningful support.</p>
           </div>
@@ -124,19 +124,19 @@ const LandingPage = ({ isAuthenticated }) => {
 
       {/* Featured Requests */}
       <div className="flex flex-col gap-6">
-        <div className="flex justify-between items-end">
+        <div className="flex md:justify-between md:items-end flex-col md:flex-row gap-6">
           <div>
             <span className="text-xs font-bold tracking-widest text-[#115e59] uppercase mb-2 block">FEATURED REQUESTS</span>
             <h2 className="text-[32px] font-extrabold text-[#1a2e2a]">Community problems currently in motion</h2>
           </div>
-          <Link to="/explore" className="bg-white border border-gray-200 text-[#1a2e2a] px-5 py-2.5 rounded-full text-sm font-bold shadow-sm hover:bg-gray-50">
+          <Link to="/explore" className="bg-white border border-gray-200 text-[#1a2e2a] px-5 py-2.5 whitespace-nowrap w-34 rounded-full text-sm font-bold shadow-sm hover:bg-gray-50">
             View full feed
           </Link>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {featured.map((req, i) => (
-            <div key={i} className="bg-white p-6 rounded-[2rem] border border-gray-100 shadow-sm flex flex-col justify-between">
+            <div key={i} className="bg-white p-6 rounded-4xl border border-gray-100 shadow-sm flex flex-col justify-between">
               <div>
                 <div className="flex gap-2 mb-4">
                   <span className="bg-[#e2f1ec] text-[#115e59] px-2.5 py-1 rounded-md text-[11px] font-bold uppercase">{req.category}</span>
@@ -154,9 +154,18 @@ const LandingPage = ({ isAuthenticated }) => {
                 </div>
               </div>
               <div className="flex justify-between items-center pt-4 border-t border-gray-50">
-                <div>
-                  <div className="text-[13px] font-bold text-[#1a2e2a]">{req.createdBy?.name}</div>
-                  <div className="text-[11px] text-gray-500">{req.createdBy?.location || 'Karachi'} • 1 helper interested</div>
+                <div className="flex items-center gap-3">
+                  {req.createdBy?.avatar ? (
+                    <img src={req.createdBy.avatar} alt="" className="w-8 h-8 rounded-full object-cover shadow-sm" />
+                  ) : (
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#129F8A] to-[#0d7377] flex items-center justify-center text-white text-[10px] font-bold shadow-sm">
+                      {req.createdBy?.name?.charAt(0) || "?"}
+                    </div>
+                  )}
+                  <div>
+                    <div className="text-[13px] font-bold text-[#1a2e2a]">{req.createdBy?.name}</div>
+                    <div className="text-[11px] text-gray-500">{req.createdBy?.location || 'Karachi'} • 1 helper interested</div>
+                  </div>
                 </div>
                 <Link to={`/request/${req._id}`} className="bg-gray-50 text-[#1a2e2a] px-4 py-2 rounded-full text-[12px] font-bold border border-gray-100 hover:bg-gray-100">
                   Open details
