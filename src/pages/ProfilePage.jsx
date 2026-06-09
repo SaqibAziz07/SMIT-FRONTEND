@@ -88,7 +88,10 @@ const ProfilePage = ({ user, login, logout }) => {
     }
   };
 
-  const handleLogout = () => { logout(); navigate("/"); };
+  const handleLogout = () => { 
+    logout(); 
+    navigate("/", { replace: true });
+  };
 
   // ── Avatar display component ─────────────────────────────────────────────────
   const AvatarSection = () => (

@@ -32,6 +32,11 @@
 
     --radius: 0.5rem;
   }
+
+  /* Prevent layout shift from scrollbar */
+  html {
+    overflow-y: scroll;
+  }
 }
 
 @layer base {
@@ -43,5 +48,12 @@
     color: var(--foreground);
     font-family: 'Inter', system-ui, sans-serif;
     min-height: 100vh;
+  }
+
+  /* Smooth global transitions */
+  * {
+    transition-property: background-color, border-color, color, fill, stroke, box-shadow;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 200ms;
   }
 }

@@ -3,7 +3,72 @@ import { useState, useEffect } from "react";
 import { LogOut, Menu, X, Bell, User, LayoutDashboard, Zap } from "lucide-react";
 import axios from "axios";
 import { API_ENDPOINTS } from "../config/api.js";
-import "./Navbar.css";
+
+const navbarStyles = `
+  @keyframes slideDownFade {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideUpFade {
+    from {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes pulse-notification {
+    0%, 100% {
+      box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+    }
+    50% {
+      box-shadow: 0 0 0 4px rgba(239, 68, 68, 0);
+    }
+  }
+
+  /* Sticky navbar positioning with performance optimization */
+  .navbar-sticky {
+    will-change: transform;
+    transform: translateZ(0);
+    -webkit-font-smoothing: antialiased;
+    -webkit-backface-visibility: hidden;
+  }
+
+  /* Smooth menu animations */
+  .animate-slide-down {
+    animation: slideDownFade 0.3s ease-out forwards;
+  }
+
+  .animate-dropdown {
+    animation: slideDownFade 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  /* Pulsing notification badge */
+  .animate-pulse-notification {
+    animation: pulse-notification 2s infinite;
+  }
+
+  /* Performance optimizations for interactive elements */
+  .navbar-interactive {
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+  }
+
+  /* Logo gradient hover effect with performance */
+  .navbar-logo:hover {
+    filter: brightness(1.1);
+  }
+`;
 
 const Navbar = ({ isAuthenticated, user, logout }) => {
   const location = useLocation();
@@ -48,15 +113,17 @@ const Navbar = ({ isAuthenticated, user, logout }) => {
 
   const activeLink = (path) =>
     location.pathname === path
-      ? "text-[#0d7377] font-semibold px-3.5 py-2 rounded-lg transition-all duration-200 relative"
+      ? "text-[#0d7377] font-semibold px-3.5 py-2 rounded-lg transition-all duration-200 relative bg-[#0d7377]/10 rounded-xl"
       : "text-gray-600 hover:text-gray-900 px-3.5 py-2 rounded-lg transition-all duration-200 hover:bg-gray-100/50";
 
   return (
-    <div className="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-gray-200/50 pointer-events-none">
-      <div className="pointer-events-auto max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <>
+      <style>{navbarStyles}</style>
+      <div className="navbar-sticky lg:px-10 sticky top-0 z-50 max-w-full bg-white/80 backdrop-blur-md border-b border-gray-200/50 pointer-events-none">
+        <div className="pointer-events-auto max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         {/* Left: Logo + Brand */}
-        <Link to="/" className="flex items-center gap-3 shrink-0 group">
-          <div className="bg-gradient-to-br from-[#129F8A] to-[#0d7377] text-white w-9 h-9 rounded-xl flex items-center justify-center font-bold text-lg shadow-lg group-hover:shadow-xl transition-all duration-300">
+        <Link to="/" className="flex items-center gap-3 shrink-0 group navbar-logo">
+          <div className="navbar-interactive bg-linear-to-br from-[#129F8A] to-[#0d7377] text-white w-9 h-9 rounded-xl flex items-center justify-center font-bold text-lg shadow-lg group-hover:shadow-xl transition-all duration-300">
             H
           </div>
           <span className="font-bold text-base tracking-tight text-[#1a2e2a] group-hover:text-[#0d7377] transition-colors duration-300">HelpHub AI</span>
@@ -91,8 +158,7 @@ const Navbar = ({ isAuthenticated, user, logout }) => {
                 {/* Create Request */}
                 <Link
                   to="/create-request"
-                  className="bg-[#0d7377] hover:bg-[#0d5a66] text-white px-5 py-2 rounded-xl text-sm font-semibold transition-all duration-300 hover:shadow-lg"
-                  style={{ transform: 'translateZ(0)' }}
+                  className="navbar-interactive bg-[#0d7377] hover:bg-[#0d5a66] text-white px-5 py-2 rounded-xl text-sm font-semibold transition-all duration-300 hover:shadow-lg"
                 >
                   Create Request
                 </Link>
@@ -104,7 +170,7 @@ const Navbar = ({ isAuthenticated, user, logout }) => {
                 >
                   <Bell size={20} />
                   {unreadCount > 0 && (
-                    <span className="absolute -top-1 -right-1 inline-flex items-center justify-center w-5 h-5 bg-red-500 text-white text-[9px] font-bold rounded-full shadow-lg animate-pulse">
+                    <span className="absolute -top-1 -right-1 inline-flex items-center justify-center w-5 h-5 bg-red-500 text-white text-[9px] font-bold rounded-full shadow-lg animate-pulse-notification">
                       {unreadCount > 9 ? "9+" : unreadCount}
                     </span>
                   )}
@@ -114,7 +180,7 @@ const Navbar = ({ isAuthenticated, user, logout }) => {
                 <div className="relative">
                   <button
                     onClick={() => setDropdownOpen(!dropdownOpen)}
-                    className="flex items-center gap-2 p-1.5 hover:bg-gray-100 rounded-2xl transition-all duration-300"
+                    className="navbar-interactive flex items-center gap-2 p-1.5 hover:bg-gray-100 rounded-2xl transition-all duration-300"
                   >
                     {user?.avatar ? (
                       <img src={user.avatar} alt="Profile" className="w-9 h-9 rounded-xl object-cover ring-2 ring-[#0d7377]/10" />
@@ -131,7 +197,7 @@ const Navbar = ({ isAuthenticated, user, logout }) => {
                         className="fixed inset-0 z-40"
                         onClick={() => setDropdownOpen(false)}
                       />
-                      <div className="absolute right-0 mt-3 w-52 bg-white rounded-2xl shadow-xl border border-gray-100 z-50 overflow-hidden animate-in fade-in zoom-in-95 duration-200 pointer-events-auto">
+                      <div className="absolute right-0 mt-3 w-52 bg-white rounded-2xl shadow-xl border border-gray-100 z-50 overflow-hidden animate-dropdown duration-200 pointer-events-auto">
                         <div className="p-2">
                           <Link
                             to="/profile"
@@ -171,7 +237,7 @@ const Navbar = ({ isAuthenticated, user, logout }) => {
                 {/* Live Community Signals */}
                 <Link
                   to="/explore"
-                  className="flex items-center gap-2 border border-[#0d7377] text-[#0d7377] hover:bg-[#e2f1ec] px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-300"
+                  className="navbar-interactive flex items-center gap-2 border border-[#0d7377] text-[#0d7377] hover:bg-[#e2f1ec] px-4 py-2 rounded-2xl text-sm font-semibold transition-all duration-300"
                 >
                   <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
                   Live Community Signals
@@ -179,8 +245,7 @@ const Navbar = ({ isAuthenticated, user, logout }) => {
                 {/* Join the Platform */}
                 <Link
                   to="/auth"
-                  className="bg-[#0d7377] hover:bg-[#0d5a66] text-white px-5 py-2 rounded-xl text-sm font-semibold transition-all duration-300 hover:shadow-lg"
-                  style={{ transform: 'translateZ(0)' }}
+                  className="navbar-interactive bg-[#0d7377] hover:bg-[#0d5a66] text-white px-5 py-2 rounded-2xl text-sm font-semibold transition-all duration-300 hover:shadow-lg"
                 >
                   Join the Platform
                 </Link>
@@ -212,7 +277,7 @@ const Navbar = ({ isAuthenticated, user, logout }) => {
           
           {/* Animated Mobile Menu */}
           <div
-            className="fixed top-16 left-0 right-0 w-full bg-white/95 backdrop-blur-md border-b border-gray-200/50 pointer-events-auto lg:hidden z-45 animate-in slide-in-from-top-2 duration-300"
+            className="fixed top-16 left-0 right-0 w-full border-b border-gray-200/50 bg-white/95 backdrop-blur-md pointer-events-auto lg:hidden z-45 animate-slide-down duration-300"
           >
             <div className="flex flex-col gap-1 p-4 max-h-[calc(100vh-80px)] overflow-y-auto">
               {isAuthenticated ? (
@@ -382,6 +447,7 @@ const Navbar = ({ isAuthenticated, user, logout }) => {
         </>
       )}
     </div>
+    </>
   );
 };
 

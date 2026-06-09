@@ -1,0 +1,9 @@
+/* Prevent layout shift from scrollbar */
+html {
+  overflow-y: scroll;
+}
+
+/* Smooth global transitions */
+* {
+  @apply transition-[background-color,border-color,color,fill,stroke,box-shadow] duration-200;
+}

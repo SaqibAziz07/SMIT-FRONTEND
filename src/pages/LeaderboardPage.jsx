@@ -172,14 +172,14 @@ const LeaderboardPage = () => {
                       </div>
 
                       {/* Stats */}
-                      <div className="flex items-center gap-6 shrink-0">
-                        <div className="text-center hidden sm:block">
+                      <div className="flex items-center gap-3 shrink-0">
+                        <div className="text-center">
                           <span className="block text-[10px] font-bold text-gray-400 uppercase tracking-widest">Solved</span>
                           <span className="font-extrabold text-base flex items-center gap-1 justify-center">
                             <Award size={13} className="text-[#14b8a6]" /> {user.contributions}
                           </span>
                         </div>
-                        <div className="text-center hidden sm:block">
+                        <div className="text-center">
                           <span className="block text-[10px] font-bold text-gray-400 uppercase tracking-widest">Trust</span>
                           <span className="font-extrabold text-base flex items-center gap-1 justify-center">
                             <TrendingUp size={13} className="text-[#115e59]" /> {user.trustScore}%
